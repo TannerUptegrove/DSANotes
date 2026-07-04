@@ -1,0 +1,68 @@
+===== AVL Tree Notes =====
+A self-balancing binary search tree. Each node stores some data,
+pointers to its left and right children, and the difference
+between the heights of their subtrees.
+
+Note that when a node is created, its height is set as 1 by default,
+since it will be on the first row from the bottom.
+
+The goal of this tree is to ensure that its nodes are evenly
+distributed down its branches, thereby keeping its average
+search time at O(log n) instead of O(n).
+
+Balance Factor: 
+- The difference between the heights of a node's left and right subtrees.
+- As nodes are inserted, their heights are calculating by selecting the
+  highest height between their children and adding +1 to it.
+  In the code, its written as 1 + max(left->height, right->height).
+- Then when evaluating the balance factor of a node, the height of its
+  left and right children are subtracted, with the difference defining
+  how balanced it is. This can only be between -1 and +1. If its outside
+  of this range, then it needs to be rebalanced.
+
+Time Complexity:
+- Insertion and deletion: O(log n)
+- Search: O(log n)
+
+
+
+
+
+===== Balance Factor Examples =====
+Each example will have a picture of the nodes, with their heights displayed.
+
+Note that a null node automatically has a balance factor of -1 and a childless
+node has one of 0.
+
+Ex 1: A node with only a left child.
+    n (2)       max(left->height, right->height) = left (1)
+     /          BF = 1 - (0) = 1 VALID
+   n (1)
+
+Ex 2: A node with two left descendants and one right child.
+       n (3)       max(left->height, right->height) = left (2)
+      /    \       BF = 2 - (1) = 1 VALID
+    n(2)  n (1)
+     /
+   n (1)
+    
+Ex 3: A node with two left descendants, and no right ones.
+     n (3)     max(left->height, right->height) = left (2)
+      /        BF = 2 - 0 = 2 INVALID
+    n(2)
+     /
+   n (1)
+
+Ex 4: A node with two right descendants, and no left ones.
+   n(3)       max(left->height, right->height) = right (2)
+    \         BF = 0 - 2 = -2 INVALID
+    n(2)
+      \ 
+     n(1)
+
+Ex: 5 A node with a left child that has a right grandchild, and no right children.
+    n (3)     max(left->height, right->height) = left (2)
+     /        BF = 2 - 0 = 2 INVALID
+   n(2)
+     \
+    n(1)

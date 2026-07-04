@@ -1,0 +1,20 @@
+===== Red-Black Tree Notes =====
+A self-balancing binary search tree. Each node stores some
+data, pointers to its neighboring nodes (including their
+parents), and a color variable.
+
+The goal of this tree is to ensure that its nodes are evenly
+distributed down its branches, thereby keeping its average
+search time at O(log n) instead of O(n).
+
+Color Rules:
+- Each node is either red or black.
+- The root of the tree is always black.
+- Red nodes cannot have red children.
+- Every path from a node to its descendant null nodes
+  must have the same number of black nodes.
+- All leaves are black.
+
+Time Complexity:
+- Insertion and deletion: O(log n)
+- Search: O(log n)

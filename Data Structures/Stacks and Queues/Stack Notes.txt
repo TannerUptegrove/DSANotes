@@ -1,0 +1,30 @@
+===== Stacks =====
+A list of elements that follow the LAST-IN FIRST-OUT (LIFO) principle. This is very
+similar to how a stack of plates work, where the last plate added is the first to be removed.
+
+The simplest way to implement this is with an array and an int to track the top of the
+stack. Note that the 0th index then represents the bottom.
+
+Advantages:
+- Commonly used to track the order of actions, events. For example at runtime, most programming
+  languages use a stack to make function calls and then exit out of them in order.
+
+
+Disadvantages:
+- Data can only be manipulated from the top of the stack.
+- Array-based implementations have static sizes defined before runtime. Pushing data past the
+  allocated memory limit triggers a stack overflow error.
+- Accessing a deeply buried element requires removing all the ones above it.
+
+Time Complexity:
+- Insertion and deletion: O(1)
+- Peeking: O(1)
+- Search: O(n)
+
+Space Complexity:
+O(n) where n is the number of elements in the stack.
+
+When to Use:
+- In algorithms that require going back through operations in reverse order. For example,
+  many applications use this to implement Undo/Redo actions.
+- To reverse the order of a string or other list of elements.

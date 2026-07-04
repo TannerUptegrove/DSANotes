@@ -1,0 +1,70 @@
+===== Hash Tables =====
+A data structure that stores key-value pairs.
+
+Implementing this usually involves an array of arrays, where the indexes of the outer one
+are referred to as "buckets".
+
+To store a key-value pair, the key goes through a hashing function where it gets translated
+into a distinct bucket index. From there, the value can be inserted at that position very quickly.
+A collision is what happens when two key-value pairs hash to the same bucket.
+
+Hash Function:
+- Used to determine the position of a key-value pair in the structure.
+- For a key-value pair, its key goes through the hash function, where it gets translated into
+  a distinct bucket index. From there its value can be inserted and then later accessed at
+  that location
+- A collision happens when multiple key-value pairs hash to the same bucket. A main difference
+  between hash table types depends on how they address this.
+- Ideally this should distribute pairs evenly across the buckets as collisions can slow the
+  structure down.
+- One of the simplest hash functions to implement is: index = (key % number of buckets).
+
+Load Factor: 
+- Used to determine how many elements are kept in a hash table relative to how many buckets
+  it has. 
+- If the load factor is too high, that may mean there are numerous collisions, ruining the
+  search speed. This is resolved by resizing the number of buckets and reinserting
+  the key-value pairs.
+- Load Factor = Number of key-value pairs / number of buckets. 
+
+Types:
+- Chaining: Each bucket stores a vector or linked list. When a collision occurs, both
+            key-value pairs can be inserted into the inner dynamic structure.
+- Open Addressing: collisions are handled by looking for another empty bucket and inserting
+                   the incoming key-value pair there instead.
+  - Double Hashing: Performs the hash function again to avoid collisions.
+  - Linear Probing: The incoming key-value pair is placed in the next bucket.
+  - Quadratic Probing: An arbitrary quadratic polynomial is used until an
+                        available bucket is found.
+
+Advantages:
+- Directly calculates the location of key-value pairs. This means searches are very fast,
+  even as the dataset within grows.
+- Unlike basic arrays that use int based indexes, these allow almost any datatype to be
+  used as a key, such as strings, floats, and objects.
+
+Disadvantages:
+- Hash tables can become very inefficient if filled with too many collisions, which becomes
+  a common occurrence as its dataset grows.
+- Does not maintain an order for the elements within, which makes it difficult to retrieve
+  data from it in a specific order.
+- Requires more underlying memory than the data they hold to prevent collisions.
+- Can be vulnerable to collision attacks where malicious inputs are inserted to force
+  the hash table to degrade, leading to potential DoS.
+
+Time Complexity:
+- Inserting and deleting: O(1) but can degrade to O(n) with collisions.
+- Search by key: O(1) but can degrade to O(n) with collisions.
+- Search by value: O(n)
+- Resizing: O(n) where n is the number of key-value pairs. This process involves
+            creating a new hashtable and reassigning buckets to the key-value pairs.
+            This still scales well though because the table grows and shrinks
+            exponentially, causing potentially expensive linear rehashing operations
+            to happen less frequently.
+
+Space Complexity:
+- O(n) where n is the number of key-value pairs.
+
+When to Use:
+- Several dynamic programming problems involve using a hash table to store
+  operation results.

@@ -1,0 +1,77 @@
+===== Tree Notes =====
+Stores elements (called nodes) in a triangular, hierarchical structure.
+Each node stores some data and pointers to its neighboring nodes.
+
+Root: The first node of a tree. Used to access the other nodes below it
+      by traversing through its pointers.
+Edge: Visually speaking, the lines between the nodes that represent 
+      their connectivity.
+
+Parent: A node that is an immediate predecessor of another node.
+Child: A node that is an immediate successor of another node.
+Ancestor: Any node on the path from thee root to a given node.
+Descendent: A node with an ancestor.
+Leaf: Nodes that have no children.
+Siblings: Multiple nodes on the same level.
+Subtree: A section of a tree.
+
+Degree: The number of subtrees a node has (i.e. the number of children).
+Depth: A node's distance from the root node. Each edge on the path adds 1 to the depth.
+Height: Defined as a tree's longest path from the root to the bottommost node.
+
+Types:
+- Binary Tree: Each node can have at most two children.
+  Full: Every node has two children.
+  Complete: All levels are fully filled except possibly the last, which is filled
+            from left to right.
+  Balanced: The height difference between left and right subtrees of every
+            node is minimal.
+
+- Ternary Tree: Each node can have at most three children.
+- N-ary Tree: Nodes can have any number of children. Each one has a list
+              of references to their children.
+
+Types of Binary Trees:
+- Binary Search Tree (BST): All values in the left subtree of a node are less
+                            than that node's data. All values in the right subtree
+                            of a node are greater than that node's data. Each
+                            node's data must be unique.
+- AVL Tree: A self-balancing tree where the difference between subtree heights
+            of any node cannot be more than 1.
+- Red-Black Tree: A self-balancing tree where each node is given a color and
+                  a set of rules to follow based on which one they and their
+                  neighbors are.
+
+Advantages:
+- Trees are very efficient when it comes to searching for data, with the average
+  time complexity for such operations being O(log n) because an algorithm usually
+  only needs to traverse a couple of nodes. Note that hash tables are still
+  superior, with an O(1) average time.
+- The recursive nature of trees makes them easy to traverse and organize
+  using recursive algorithms.
+- Trees are very flexible in size, able to grow or shrink depending on the
+  exact number of nodes within.
+- Unlike hash tables, ordered trees can find all keys within a certain range
+  very efficiently.
+
+Disadvantages:
+- Most implementations do not accept duplicate values.
+- Trees require a significant amount of memory to store data as each node needs
+  multiple pointers. If the tree is self balancing, more pointers and pieces of
+  data may be needed as well.
+- If a tree is not balanced, it can result in uneven search times, a problem
+  that can be devastating in applications where speed is critical.
+
+Time Complexity:
+- Insertion and deletion: O(log n) on average but can degrade to O(n) if not balanced.
+- Search: O(log n) on average but can degrade to O(n) if not balanced.
+- Breadth-First Search: O(W) where W is the maximum width of the tree.
+- Depth-First Search: O(D) where D is the maxiumum depth of the tree.
+
+Space Complexity:
+- O(n) as each element requires a node in memory.
+
+When to Use:
+- When the data has a natural parent-child hierarchy.
+- When data is constantly being changed, but a system needs fast insertions and deletions.
+- When data needs to be ordered, but whether its sequential or not doesn't matter.

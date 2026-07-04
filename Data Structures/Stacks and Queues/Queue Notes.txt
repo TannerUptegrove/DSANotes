@@ -1,0 +1,34 @@
+===== Queues =====
+A list of elements that follow the FIRST-IN FIRST-OUT (FIFO) principle. This is very
+similar to how a line of people work, the first in line is the first to leave it.
+
+The simplest way to implement this is with an array and two ints that will track the
+front and rear of the queue. Note that the 0th index cannot be used as an alternative
+to the front element as "deleting" elements involves incrementing the front int so
+as to not encounter them again.
+
+Types:
+- Normal Queue: Orders the data based on its arrival.
+- Priority Queue: Orders data based on its value.
+
+Advantages:
+- Allows a program to process data in the sequence it was received.
+- Acts as an ideal buffer between processes running at different speeds. Can be used
+  when a services is used my multiple consumers.
+
+Disadvantages:
+- Data can only be manipulated from the front or rear of the queue.
+- Array-based implementations have static sizes defined before runtime. Pushing data past the
+  allocated memory limit triggers an overflow error.
+
+Time Complexity:
+- Insertion and deletion: O(1)
+- Search: O(n)
+- PeekFront: O(1)
+- PeekRear: O(1)
+
+Space Complexity:
+- O(n) where n is the number of elements in the queue.
+
+When to Use:
+- When data needs to be processed in the order it arrived. 

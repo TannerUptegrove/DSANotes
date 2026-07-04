@@ -1,0 +1,194 @@
+===== Graph Notes =====
+A non-linear structure made up of vertices (or nodes)
+connected to each other with edges (lines). These
+features can each be labled or not.
+
+Every tree will always be a graph, but not all graphs are
+trees. The main thing seperating them is that trees have
+more rules. Linked lists, trees, and heaps are all special
+cases of graphs.
+
+Types:
+- Weighted: Each edge has a numbered weight used to represent
+            the distance, cost, or time between vertices.
+- Unweighted: All edges are treated equally, with no weight
+              values assigned to them.
+- Directed: Each edge has only one direction, but multiple
+            edges can be used to make two connected vertices
+            bi-directional.
+- Undirected: Edges go in both ways.
+
+Traversal Techniques for Graphs:
+- Depth First Search (DFS): Explores as far as possible along
+                            each branch before backtracking.
+                            Usees a stack (or recursion).
+- Breadth First Search (BFS): Explores all neighbors of a
+                              vertex before moving to the
+                              next level. Uses a queue.
+
+Spanning Tree: A subset of a graph that includes all of the graph's
+               verticies, but doesn't contain edge cycles. A graph
+               may have multiple of these.
+
+Minimum Spanning Tree: Contains all the properties of a spanning tree,
+                       but with the added constraint of having the
+                       minimum possible weights among all possible spanning
+                       trees. A graph may have multiple of these.
+
+Advantages:
+- Graphs are effiective tools to represent complex data, especially
+  relationships between datapoints are not straighforward. They can help uncover
+  patterns that may be difficult when using other methods.
+- With proper algorithms, complex operations can be performed on large datasets.
+- Can be used to find the shortest path betweeen two points, a commonn problem in
+  logistics and travel planning.
+
+Disadvantages:
+- Graphs can only represent relationships between objecs, and not their properties
+  or attributes.
+- Can reveal sensitive information about individuals or organizations when used in
+  social network analysis or marketing environments.
+
+Time Complexity:
+- Insertion (List): O(1)
+- Insertion (Matrix): O(V^2) because a new matrix must be created, which stores
+                      connections with a V x V grid. This can be reduced though to
+                      O(V) if the matrix is preallocated with a larger than needed
+                      matrix.
+- Deletion (List): O(V/E) average but, O(V) in worst case.
+- Deletion (Matrix): O(1)
+- Depth First Search: O(V+E)
+- Breadth First Search: O(V+E)
+- Dijkstra's (Simple Matrix): O(V^2)
+- Dijkstra's (Binary Heap): O((V + E) * log V)
+- Bellman-Ford (Worst-Case): O(V^3)
+- Bellman-Ford (Average): O(V * E)
+
+
+
+
+
+===== Adjacency Matrix =====
+One way to represent a graph. 
+
+This is commonly used when:
+1. A graph has many edges (it's dense).
+2. A system needs a constant time O(1) for edge lookups.
+3. An algorithm heavily relys on matrix operations, like
+   Flyod-Warshall or graph power calculations.
+
+Approach 1:
+- Utilizes a 2D array.
+- The rows and columns denote verticies, with the intersections
+  between them being used to save the weight of the edges
+  connecting them.
+- Intersections between the same vertex have a weight of 0.
+- While this is a simple approach to visualize, it makes
+  certain algorithms like Bellman Ford very inefficient.
+
+  matrix[vertex1][vertex2] = weight;
+              or      
+  matrix[vertex1][vertex2] = 1 has edge
+  matrix[vertex1][vertex2] = 0 no edge
+
+- Ex: For an undirected graph with 6 vertices:
+    1 2 3 4 5
+  1 0 1 1 1 0   The 1s show that there is an edge between
+  2 1 0 1 0 1   the row vertex and column vertex.
+  3 1 1 0 1 1
+  4 1 0 1 0 0
+  5 0 0 1 0 0
+
+Approach 2:
+- Each element of the outer array stores an edge object.
+- Each edge object stores three ints, a source index,
+  destination index, and the weight.
+
+  matrix[[source, destination, weight],
+         [source, destination, weight],
+         [source, destination, weight]]
+
+- To get the first edge's data from the example below:
+  matrix.source = 1
+  matrix.destination = 2
+  matrix.weight = 5
+
+- Ex: For a graph with 6 verticies:
+  Edge 1: [1, 2, 5]
+  Edge 2: [1, 3, 20]
+  Edge 3: [1, 4, -2]
+  Edge 4: [2, 3, 8]
+  Edge 5: [3, 4, 18]
+  Edge 6: [3, 5, 7]  
+
+
+===== Adjacency List =====
+The other most common way to represent a graph. This is an array-like
+sequences, where each one starts with a vertex, and continue with the 
+verticies connected to it.
+
+This is commonly used when:
+1. A graph has relatively few edges (it's spares).
+2. BFS and DFS algorithms are frequently used as this
+   structure is ideal for them.
+3. Vertices and edges are frequently added or removed.
+
+Ex: For a graph with vertices 1, 5, 6, 8, and 9.
+1 -> 5 -> 6 -> 8
+5 -> 1 -> 6             For each vertex, the order of which
+6 -> 5 -> 1 -> 8 -> 9   ones to list next is usually determined
+8 -> 1 -> 6             by going from left-to-right or
+9 -> 6                  top-to-bottom.
+
+
+
+
+
+===== Graph Algorithms =====
+Dijkstra's Algorithm:
+- Developed in 1956 by Edsger Dijktra while he worked as a programmer at the
+  Mathematical Center in Amsterdam.
+- Given a starting vertex, this finds the shortest distance to every other vertex.
+  This can only be used on weighted graphs with non-negative weights.
+- This usually requires using a priority queue that keeps the shortest weights at
+  the top.
+- One of the most well-known greedy algorithms.
+
+- If doing this on paper:
+  1. Select a starting vector. Write its distance to itself as 0.
+  2. For the other vertices, write their distances from the starting vertex as infinity.
+  3. From the starting vertex, go over each of the edges directly connected to it. Add
+     its initial distance to the weight of an edge, and write that result near the
+     appropriate neighboring vertex.
+  4. Once finished with step 3, mark the vertex as "visited" and go to the next vertex
+     in the list. Skip over any whose distance is still infinity.
+  5. If any result is smaller than an already written distance, it takes priority, as
+     that indicates a shorter distance has been found.
+
+Bellman-Ford:
+- First proposed by Algonso Shimbel in 1955, but later named after Richard Bellman
+  and Lester Ford Jr (1958) after they published it (1956).
+- Given a starting vertex, this finds the shortest distance to every other vertex.
+- Unike Dijkstra's, this can be used on graphs with negative weights. This is because
+  it does not mark vertices as "visited" once they have been processed. Instead,
+  it uses dynamic programming to go over then multiple times until a shortest distance
+  has been found for each of them. This does make it quite slower than Dijkstra's though.
+- With it handling negative weighted graphs though, it needs to be able to detect
+  negative cycles, where there is no true shortest distance as it continues to be
+  endlessly updated. This is done by relaxing the weights one more time after it
+  has been done for each vertex.
+
+- If doing this on paper:
+  1. Select a starting vector. Write its distance to itself as 0.
+  2. For the other vertices, write their distances from the starting vertex as infinity.
+  3. From the starting vertex, go over each of the edges directly connected to it. Add
+     its initial distance to the weight of the edge, and write that result near the
+     appropriate neighboring vertex.
+  4. Once finished with step 3, move to the next vertex in the list. Skip over any
+     whose distance is still infinity.
+  5. If any result is smaller than an already written distance, it takes priority,
+     as that indicates a shorter distance has been found.
+  5. Repeat this process until the distances no longer update. This may involve
+     cycling through the nodes multiple times.
+  6. If the distances keep updating, that may indicate a negative cycle. End the
+     process in this case as no shortest path can be found here.

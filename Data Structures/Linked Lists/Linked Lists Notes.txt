@@ -1,0 +1,43 @@
+===== Linked List Basics =====
+A list of elements where each one (called a node) stores some data and pointers
+that connect it to neighboring nodes.
+
+Head: The first node of the linked list. Used to access the other nodes after it
+      by traversing through its pointer.
+
+Types:
+- Singly Linked List: Each node stores a next pointer for forward traversal.
+- Doubly Linked List: Each node stores both a prev and next pointer for
+                      forward and reverse traversal.
+
+Advantages:
+- Compared to an array, it doesn't need to waste time rearranging its elements
+  when one is inserted or deleted. Just the pointers around the new node need to
+  be changed. Because of this, inserting and deleting at a known node takes O(1) time,
+  provided we already have a pointer to the right position.
+- Doesn't have a fixed size. Nodes can be added to it flexibly.
+- Can be more memory efficient than dynamic arrays as they won't waste time
+  allocating and deallocating space.
+
+Disadvantages:
+- Traversing through a linked list is more time consuming compared to an array as
+  the elements cannot be accessed through an index. Instead, it needs to visit
+  each node before the one it's looking for.
+- Traversing backwards is only possible with a doubly linked list, which could be a
+  drain on memory as more pointers are required to connect nodes to their predecessors.
+
+Time Complexity:
+- Insertion and deletion: O(1) if at a known position. Otherwise O(n).
+- Search: O(n).
+- Cycle Detection: O(n).
+
+Space Complexity: 
+- O(n) as each element requires a node in memory.
+- Even though doubly linked lists use twice as much memory as singly linked ones,
+  they still scale linearly with the number of nodes they have, so they also have
+  a space complexity of O(n).
+
+When To Use:
+- In algorithms that need to frequently insert or delete items from a large dataset.
+- Circular lists can be used to implement things in a revolving manner where the last
+  node needs to be connected to the first.
